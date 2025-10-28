@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabella Alfonso - UI/UX Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #3D7DCA;
+            --bright-blue: #0066FF;
+            --light-blue: #E8F1FA;
+            --cream: #FEFDFB;
+            --pink: #E8F1FA;
+            --light-green: #D4E6F1;
+            --dark: #1a1a1a;
+            --gray: #666;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            background-color: var(--cream);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Cursor trail droplets */
+        .cursor-droplet {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.6;
+            animation: droplet-fade 0.8s ease-out forwards;
+        }
+
+        @keyframes droplet-fade {
+            to {
+                opacity: 0;
+                transform: translateY(20px) scale(0.5);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background-image: radial-gradient(circle, var(--primary-blue) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Water texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(61, 125, 202, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 102, 255, 0.3) 0%, transparent 50%);
+            background-size: 100% 100%;
+            animation: water-flow 20s ease-in-out infinite;
+        }
+
+        @keyframes water-flow {
+
+            0%,
+            100% {
+                background-position: 0% 0%, 100% 100%;
+            }
+
+            50% {
+                background-position: 100% 100%, 0% 0%;
+            }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+            animation: particle-drift linear infinite;
+        }
+
+        @keyframes particle-drift {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(254, 253, 251, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        nav .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--bright-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul a:hover {
+            color: var(--primary-blue);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 10rem 3rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-blue) 50%, var(--cream) 100%);
+            background-size: 400% 400%;
+            animation: gradient-flow 20s ease infinite;
+        }
+
+        @keyframes gradient-flow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 25px;
+            background: linear-gradient(to bottom, transparent, var(--primary-blue), transparent);
+            border-radius: 2px;
+            opacity: 0;
+            animation: raindrop ease-in infinite;
+        }
+
+        @keyframes raindrop {
+            0% {
+                opacity: 0.7;
+                transform: translateY(0) translateX(0) rotate(-15deg);
+            }
+
+            70% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(600px) translateX(100px) rotate(-15deg);
+            }
+        }
+
+        .raindrop:nth-child(1) {
+            top: -30px;
+            left: 20%;
+            animation-duration: 1.4s;
+        }
+
+        .raindrop:nth-child(2) {
+            top: -30px;
+            left: 40%;
+            animation-duration: 1.6s;
+            animation-delay: 0.6s;
+        }
+
+        .raindrop:nth-child(3) {
+            top: -30px;
+            left: 60%;
+            animation-duration: 1.5s;
+            animation-delay: 0.3s;
+        }
+
+        .raindrop:nth-child(4) {
+            top: -30px;
+            left: 80%;
+            animation-duration: 1.7s;
+            animation-delay: 0.9s;
+        }
+
+        .raindrop:nth-child(5) {
+            top: -30px;
+            left: 30%;
+            animation-duration: 1.5s;
+            animation-delay: 1.2s;
+        }
+
+        .raindrop:nth-child(6) {
+            top: -30px;
+            left: 50%;
+            animation-duration: 1.6s;
+            animation-delay: 0.2s;
+        }
+
+        .raindrop:nth-child(7) {
+            top: -30px;
+            left: 70%;
+            animation-duration: 1.4s;
+            animation-delay: 0.8s;
+        }
+
+        .raindrop:nth-child(8) {
+            top: -30px;
+            left: 15%;
+            animation-duration: 1.7s;
+            animation-delay: 0.5s;
+        }
+
+        .wave-decoration {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            opacity: 0.15;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,50 C150,80 350,0 600,50 C850,100 1050,20 1200,50 L1200,120 L0,120 Z' fill='%233D7DCA'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            animation: wave 15s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            opacity: 0.5;
+            animation: wave 20s linear infinite reverse;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content .small-text {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(5rem, 12vw, 10rem);
+            line-height: 1;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, var(--primary-blue), var(--bright-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .tagline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-content h1 span.letter {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-content h1 span.letter:hover {
+            animation: ripple 1s ease;
+        }
+
+        @keyframes ripple {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            25% {
+                transform: translateY(-10px);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+
+            75% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .about-section {
+            padding: 6rem 0;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Section reveal animation */
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr ;
+            
+        }
+
+        .about-card {
+            background: white;
+            padding: 4rem;
+            border-radius: 32px;
+            border: 3px solid var(--dark);
+            box-shadow: 8px 8px 0 var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 var(--primary-blue);
+        }
+
+        .about-card.large {
+            grid-row: span 2;
+            background: var(--light-blue);
+        }
+
+        .about-card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .about-card h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-section {
+            padding: 6rem 0;
+            background: var(--pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,50 C150,80 350,20 600,50 C850,80 1050,20 1200,50 L1200,0 L0,0 Z' fill='%23FEFDFB'/%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1;
+            letter-spacing: -2px;
+            position: relative;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark) 50%, var(--primary-blue) 50%, var(--dark) 51%, var(--dark) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: liquid-shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes liquid-shimmer {
+
+            0%,
+            100% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 0%;
+            }
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 3px solid var(--dark);
+            position: relative;
+        }
+
+        .project-card:nth-child(1) {
+            grid-column: span 7;
+            box-shadow: 12px 12px 0 var(--primary-blue);
+        }
+
+        .project-card:nth-child(2) {
+            grid-column: span 5;
+            box-shadow: 12px 12px 0 var(--bright-blue);
+        }
+
+        .project-card:nth-child(3) {
+            grid-column: span 5;
+            box-shadow: 12px 12px 0 var(--bright-blue);
+        }
+
+        .project-card:nth-child(4) {
+            grid-column: span 7;
+            box-shadow: 12px 12px 0 var(--primary-blue);
+        }
+
+        .project-card:hover {
+            transform: translate(-6px, -6px) rotate(-1deg);
+        }
+
+        .project-card:nth-child(1):hover {
+            box-shadow: 18px 18px 0 var(--primary-blue);
+        }
+
+        .project-card:nth-child(2):hover {
+            box-shadow: 18px 18px 0 var(--bright-blue);
+        }
+
+        .project-card:nth-child(3):hover {
+            box-shadow: 18px 18px 0 var(--bright-blue);
+        }
+
+        .project-card:nth-child(4):hover {
+            box-shadow: 18px 18px 0 var(--primary-blue);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #A8C7E7 0%, var(--primary-blue) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 10rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .project-tag {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            border: 2px solid var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-content {
+            padding: 3rem;
+        }
+
+        .project-content h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .project-content p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.15rem;
+        }
+
+
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,50 C150,80 350,20 600,50 C850,80 1050,20 1200,50 L1200,0 L0,0 Z' fill='%23D4E6F1'/%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        .contact-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-wrapper h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            font-style: italic;
+            line-height: 1.1;
+        }
+
+        .contact-wrapper>p {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            border: 3px solid var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 8px 8px 0 var(--primary-blue);
+        }
+
+        .contact-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 var(--primary-blue);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--dark);
+        }
+
+        .contact-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-label {
+            font-weight: 900;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-detail {
+            font-size: 0.95rem;
+            color: var(--gray);
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .resume-box {
+            background: var(--light-blue);
+            padding: 5rem 4rem;
+            border-radius: 32px;
+            border: 3px solid var(--dark);
+            box-shadow: 12px 12px 0 var(--primary-blue);
+            margin-top: 4rem;
+        }
+
+        .resume-box h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .resume-button {
+            display: inline-block;
+            padding: 2rem 5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: 3px solid var(--dark);
+            box-shadow: 6px 6px 0 var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .resume-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .resume-button:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 var(--dark);
+            color: white;
+        }
+
+        /* Splash effect on button */
+        .splash-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: splash-out 0.8s ease-out forwards;
+        }
+
+        @keyframes splash-out {
+            to {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+
+
+        .ripple-effect {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card.large {
+                grid-row: span 1;
+            }
+
+            .projects-grid .project-card {
+                grid-column: span 12 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                padding: 0 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.2rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+            .skill-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">ISABELLA ALFONSO</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="wave-decoration">
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <div class="hero-content">
+            <p class="small-text">Hey there, I'm</p>
+            <h1 id="heroName">Isabella Alfonso</h1>
+            <p class="tagline">and I'm a UI/UX Designer!</p>
+        </div>
+    </section>
+
+    <section id="about" class="about-section section-reveal">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-card large">
+                <h2>About Me</h2>
+                <p>I'm Isabella and I'm currently a junior at The University of Florida's Digital Worlds Institute and making digital expereicnes to solve real-world problems.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="projects" class="projects-section section-reveal">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Work</h2>
+                <p class="section-subtitle">Projects that showcase my design thinking</p>
+            </div>
+            <div class="projects-grid">
+                <a href="https://www.behance.net/gallery/235886391/StarTea-Website-Design" target="_blank"
+                    style="text-decoration: none; color: inherit; grid-column: span 7;">
+                    <div class="project-card">
+                        <div class="project-image"
+                            style="background: linear-gradient(135deg, rgba(61, 125, 202, 0.2), rgba(61, 125, 202, 0.4)), url('StarTeaCover.png') center/cover;">
+                            <span class="project-tag">Web Design</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>StarTea Website Prototype</h3>
+                            <p>A calming, wellness-focused website designed for StarTea to showcase its herbal blends
+                                through a clean and professional user experience.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.behance.net/gallery/YOUR-PROJECT-2-ID" target="_blank"
+                    style="text-decoration: none; color: inherit; grid-column: span 5;">
+                    <div class="project-card">
+                        <div class="project-image"
+                            style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 102, 255, 0.4)), url('project2-image.jpg') center/cover;">
+                            <span class="project-tag">App Redesign</span>
+                            <span class="project-number">02</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>Project Title Two</h3>
+                            <p>Short description</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.behance.net/gallery/PROJECT-3-ID" target="_blank"
+                    style="text-decoration: none; color: inherit; grid-column: span 5;">
+                    <div class="project-card">
+                        <div class="project-image"
+                            style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 102, 255, 0.4)), url('project3-image.jpg') center/cover;">
+                            <span class="project-tag">App Design</span>
+                            <span class="project-number">03</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>Project Title Three</h3>
+                            <p>Short description</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.behance.net/gallery/PROJECT-4-ID" target="_blank"
+                    style="text-decoration: none; color: inherit; grid-column: span 7;">
+                    <div class="project-card">
+                        <div class="project-image"
+                            style="background: linear-gradient(135deg, rgba(61, 125, 202, 0.2), rgba(61, 125, 202, 0.4)), url('project4-image.jpg') center/cover;">
+                            <span class="project-tag">Web Design</span>
+                            <span class="project-number">04</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>Project Title Four</h3>
+                            <p>Short description</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="contact" class="contact-section section-reveal">
+        <div class="container">
+            <div class="contact-wrapper">
+                <h2>Let's create something together</h2>
+                <p>I'm always excited to collaborate on new projects and connect with fellow creatives. Feel free to
+                    reach out!</p>
+
+                <div class="contact-grid">
+                    <a href="mailto:isabellalouralfonso@gmail.com" class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="contact-label">Email</span>
+                        <span class="contact-detail">isabellalouralfonso@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/isabella-alfonso-015350304/" target="_blank"
+                        class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </div>
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-detail">Isabella Alfonso</span>
+                    </a>
+                    <a href="https://www.behance.net/isabellaalfonso2" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z" />
+                            </svg>
+                        </div>
+                        <span class="contact-label">Behance</span>
+                        <span class="contact-detail">@isabellaalfonso2</span>
+                    </a>
+                </div>
+
+                <div class="resume-box">
+                    <h3>Want to know more about my experience?</h3>
+                    <a href="#" class="resume-button">Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Isabella Alfonso.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const heroName = document.getElementById('heroName');
+            if (heroName) {
+                const text = heroName.textContent;
+                const parts = text.split(' ');
+                const isabella = parts[0];
+                const alfonso = parts[1];
+
+                heroName.innerHTML = isabella + ' <span style="background: linear-gradient(135deg, #3D7DCA, #0066FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding: 0.1em 0;">' + alfonso + '</span>';
+            }
+
+            // Cursor trail droplets
+            let lastDropletTime = 0;
+            document.addEventListener('mousemove', (e) => {
+                const now = Date.now();
+                if (now - lastDropletTime > 100) {
+                    const droplet = document.createElement('div');
+                    droplet.className = 'cursor-droplet';
+                    droplet.style.left = e.clientX + 'px';
+                    droplet.style.top = e.clientY + 'px';
+                    document.body.appendChild(droplet);
+
+                    setTimeout(() => droplet.remove(), 800);
+                    lastDropletTime = now;
+                }
+            });
+
+            // Floating particles
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                const duration = Math.random() * 5 + 5;
+                particle.style.animationDuration = duration + 's';
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), duration * 1000);
+            }
+
+            for (let i = 0; i < 15; i++) {
+                createParticle();
+            }
+            setInterval(() => {
+                if (document.querySelectorAll('.particle').length < 15) {
+                    createParticle();
+                }
+            }, 2000);
+
+            // Splash effect on resume button
+            const resumeButton = document.querySelector('.resume-button');
+            if (resumeButton) {
+                resumeButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const rect = resumeButton.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    for (let i = 0; i < 12; i++) {
+                        const splash = document.createElement('div');
+                        splash.className = 'splash-particle';
+                        splash.style.left = centerX + 'px';
+                        splash.style.top = centerY + 'px';
+
+                        const angle = (i / 12) * Math.PI * 2;
+                        const distance = 100;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance;
+
+                        splash.style.setProperty('--tx', tx + 'px');
+                        splash.style.setProperty('--ty', ty + 'px');
+
+                        document.body.appendChild(splash);
+                        setTimeout(() => splash.remove(), 800);
+                    }
+
+                    setTimeout(() => {
+                        window.location.href = resumeButton.href;
+                    }, 400);
+                });
+            }
+
+            // Scroll reveal sections
+            const revealSections = document.querySelectorAll('.section-reveal');
+
+            const revealOnScroll = () => {
+                revealSections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const triggerPoint = window.innerHeight * 0.75;
+
+                    if (sectionTop < triggerPoint) {
+                        section.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+        });
+    </script>
+</body>
+
+</html>
