@@ -13,13 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 droplet.style.left = e.clientX + 'px';
                 droplet.style.top = e.clientY + 'px';
                 document.body.appendChild(droplet);
-
                 setTimeout(() => droplet.remove(), 800);
                 lastDropletTime = now;
             }
         });
     }
-
     // Floating particles - reduced count on mobile
     const particleCount = isMobile ? 5 : 10; // Reduced from 15
     
@@ -34,10 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const duration = Math.random() * 5 + 5;
         particle.style.animationDuration = duration + 's';
         document.body.appendChild(particle);
-
         setTimeout(() => particle.remove(), duration * 1000);
     }
-
     // Create initial particles
     for (let i = 0; i < particleCount; i++) {
         createParticle();
