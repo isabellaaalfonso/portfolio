@@ -139,8 +139,8 @@ nav .container {
 
 nav .logo {
     display: block;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-image: url('IALogo.png');
     background-size: contain;
     background-repeat: no-repeat;
