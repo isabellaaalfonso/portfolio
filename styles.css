@@ -688,6 +688,18 @@ footer p {
     .project-image {
         min-height: 400px;
     }
+    
+    .about-card {
+        padding: 2rem;
+    }
+    
+    .about-card h2 {
+        font-size: 2rem;
+    }
+    
+    .about-card p {
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -731,5 +743,143 @@ footer p {
 
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .about-card {
+        padding: 1.5rem;
+    }
+    
+    .about-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-card p {
+        font-size: 1rem;
+    }
+    
+    .project-content {
+        padding: 2rem;
+    }
+    
+    .project-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .project-content p {
+        font-size: 0.95rem;
+    }
+    
+    .contact-wrapper h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-wrapper > p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 1rem 0;
+    }
+    
+    nav .logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .nav-info .name {
+        font-size: 1rem;
+    }
+    
+    .nav-contact {
+        font-size: 0.65rem;
+    }
+    
+    nav ul {
+        gap: 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .hero {
+        padding: 9rem 1rem 2rem;
+    }
+    
+    .hero-content .small-text {
+        font-size: 1rem;
+    }
+    
+    .hero-content .tagline {
+        font-size: 1.5rem;
+    }
+    
+    .about-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    
+    .about-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .about-card p {
+        font-size: 0.95rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .project-card {
+        border-radius: 24px;
+    }
+    
+    .project-content {
+        padding: 1.5rem;
+    }
+    
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .project-tag {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .project-number {
+        font-size: 3rem;
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .contact-card {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-label {
+        font-size: 0.8rem;
+    }
+    
+    .contact-detail {
+        font-size: 0.75rem;
+    }
+    
+    footer {
+        padding: 1.5rem 1rem;
+    }
+    
+    footer p {
+        font-size: 0.85rem;
     }
 }
