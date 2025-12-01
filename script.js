@@ -1,21 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Cursor trail droplets
-    let lastDropletTime = 0;
-    document.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        if (now - lastDropletTime > 100) {
-            const droplet = document.createElement('div');
-            droplet.className = 'cursor-droplet';
-            droplet.style.left = e.clientX + 'px';
-            droplet.style.top = e.clientY + 'px';
-            document.body.appendChild(droplet);
+    // Check if device is mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // Cursor trail droplets - only on desktop
+    if (!isMobile) {
+        let lastDropletTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastDropletTime > 150) { // Increased delay
+                const droplet = document.createElement('div');
+                droplet.className = 'cursor-droplet';
+                droplet.style.left = e.clientX + 'px';
+                droplet.style.top = e.clientY + 'px';
+                document.body.appendChild(droplet);
 
-            setTimeout(() => droplet.remove(), 800);
-            lastDropletTime = now;
-        }
-    });
+                setTimeout(() => droplet.remove(), 800);
+                lastDropletTime = now;
+            }
+        });
+    }
 
-    // Floating particles
+    // Floating particles - reduced count on mobile
+    const particleCount = isMobile ? 5 : 10; // Reduced from 15
+    
     function createParticle() {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -31,13 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => particle.remove(), duration * 1000);
     }
 
-    for (let i = 0; i < 15; i++) {
+    // Create initial particles
+    for (let i = 0; i < particleCount; i++) {
         createParticle();
     }
     
+    // Maintain particle count - longer interval
     setInterval(() => {
-        if (document.querySelectorAll('.particle').length < 15) {
+        const currentParticles = document.querySelectorAll('.particle').length;
+        if (currentParticles < particleCount) {
             createParticle();
         }
-    }, 2000);
+    }, 3000); // Increased from 2000ms
 });
